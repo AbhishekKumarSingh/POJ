@@ -35,22 +35,38 @@ int measure_degree(string &s) {
 }
 
 class DNA_Sequence {
-    string name;
-    int degree;
+    public:
+        string name;
+        int degree;
 };
 
 int main()
 {
     int str_len, nstring;
     cin >> str_len >> nstring;
-    DNA_Sequence[nstring];
+    DNA_Sequence DNA_Seq[100];
 
     for (int i = 0; i < nstring; i++) {
-
+        cin >> DNA_Seq[i].name;
+        DNA_Seq[i].degree = measure_degree(DNA_Seq[i].name);
     }
 
+    //arrange DNA sequence in increasing order of degree number
+    DNA_Sequence temp;
+    for (int i=0; i < nstring; i++) {
+        for (int j = 0; j < nstring-(i+1); j++) {
+            if (DNA_Seq[j].degree > DNA_Seq[j+1].degree) {
+                temp = DNA_Seq[j];
+                DNA_Seq[j] = DNA_Seq[j+1];
+                DNA_Seq[j+1] = temp;
+            }
+        }
+    }
 
-
+    //print DNA sequence
+    for (int i = 0; i < nstring; i++) {
+        cout << DNA_Seq[i].name << "\n";
+    }
 
     return 0;
 }
